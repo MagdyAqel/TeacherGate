@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#193568">
+  <title>بوابة المعلم</title>
+  <style>
+    body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f5f7fb;color:#193568;font-family:Tahoma,Arial,sans-serif}
+    .loading{text-align:center}.spinner{width:44px;height:44px;margin:0 auto 18px;border:4px solid #dce6f7;border-top-color:#2f69d9;border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <div class="loading"><div class="spinner"></div><strong>جاري فتح بوابة المعلم...</strong></div>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script>
+    (async () => {
+      const response = await fetch('./teacher-portal.zip');
+      if (!response.ok) throw new Error('تعذر تحميل ملفات التطبيق');
+      const zip = await JSZip.loadAsync(await response.arrayBuffer());
+      const [html, css, app, config] = await Promise.all([
+        zip.file('index.html').async('text'),
+        zip.file('styles.css').async('text'),
+        zip.file('app.js').async('text'),
+        zip.file('firebase-config.js').async('text')
+      ]);
+      const configCode = config.replace('export const firebaseConfig', 'const firebaseConfig');
+      const appCode = app.replace(/^import\s+\{\s*firebaseConfig\s*\}\s+from\s+["']\.\/firebase-config\.js["'];?\s*/m, '');
+      const moduleUrl = URL.createObjectURL(new Blob([configCode, '\n', appCode], { type: 'text/javascript' }));
+      const page = html
+        .replace('<link rel="stylesheet" href="styles.css">', `<style>${css}</style>`)
+        .replace('<script type="module" src="app.js"><\/script>', `<script type="module" src="${moduleUrl}"><\/script>`);
+      document.open();
+      document.write(page);
+      document.close();
+    })().catch((error) => {
+      document.body.innerHTML = `<div class="loading"><h1>تعذر فتح البوابة</h1><p>${error.message}</p></div>`;
+    });
+  </script>
+</body>
+</html>
