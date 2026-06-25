@@ -3,9 +3,7 @@ name: Extract TeacherGate source
 on:
   push:
     branches: [main]
-    paths:
-      - teacher-portal.zip
-      - .github/workflows/extract-source.yml
+  workflow_dispatch:
 
 permissions:
   contents: write
