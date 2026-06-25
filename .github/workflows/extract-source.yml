@@ -1,0 +1,26 @@
+name: Extract TeacherGate source
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - teacher-portal.zip
+      - .github/workflows/extract-source.yml
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract application files
+        run: unzip -o teacher-portal.zip -d .
+      - name: Commit extracted source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html styles.css app.js firebase-config.js README.md
+          git diff --cached --quiet || git commit -m "نشر ملفات بوابة المعلم [skip ci]"
+          git push
