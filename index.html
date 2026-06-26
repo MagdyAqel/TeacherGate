@@ -1,296 +1,82 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#193568">
-    <meta name="description" content="بوابة المعلم لعرض وإدارة التطبيقات التعليمية">
-    <title>بوابة المعلم</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <div class="page-glow page-glow-one" aria-hidden="true"></div>
-    <div class="page-glow page-glow-two" aria-hidden="true"></div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#193568">
+  <meta name="description" content="بوابة المعلم لعرض وإدارة التطبيقات التعليمية">
+  <title>بوابة المعلم</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260626-3">
+</head>
+<body>
+  <div class="page-glow page-glow-one" aria-hidden="true"></div>
+  <div class="page-glow page-glow-two" aria-hidden="true"></div>
 
-    <section class="login-screen" id="login-screen" aria-labelledby="login-title">
-      <div class="login-brand">
-        <div class="brand-mark brand-mark-large" aria-hidden="true">
-          <svg viewBox="0 0 48 48" role="img">
-            <path d="M8 12.5 24 6l16 6.5L24 19 8 12.5Z"></path>
-            <path d="M13 17v12.5C13 34 18 38 24 38s11-4 11-8.5V17"></path>
-            <path d="M40 13v13"></path>
-          </svg>
-        </div>
-        <p class="eyebrow light">مساحتك الرقمية للتعليم</p>
-        <h1>بوابة المعلم</h1>
-        <p class="brand-copy">كل تطبيقاتك التعليمية في مكان واحد، مرتبة وجاهزة للوصول من أي جهاز.</p>
-        <div class="brand-points" aria-label="مميزات البوابة">
-          <span>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg>
-            وصول سريع
-          </span>
-          <span>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg>
-            تحديث فوري
-          </span>
-          <span>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg>
-            واجهة عربية
-          </span>
-        </div>
-      </div>
-
-      <div class="login-side">
-        <div class="login-card">
-          <div class="mobile-brand">
-            <div class="brand-mark" aria-hidden="true">
-              <svg viewBox="0 0 48 48"><path d="M8 12.5 24 6l16 6.5L24 19 8 12.5Z"></path><path d="M13 17v12.5C13 34 18 38 24 38s11-4 11-8.5V17"></path><path d="M40 13v13"></path></svg>
-            </div>
-            <strong>بوابة المعلم</strong>
-          </div>
-
-          <p class="eyebrow">مرحبًا بعودتك</p>
-          <h2 id="login-title">اختر طريقة الدخول</h2>
-          <p class="login-intro">سجّل الدخول للوصول إلى التطبيقات التعليمية.</p>
-
-          <div class="role-switch" role="group" aria-label="نوع المستخدم">
-            <button class="role-button active" type="button" data-role="teacher" data-testid="teacher-role">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19v-1.5A3.5 3.5 0 0 1 7.5 14h5a3.5 3.5 0 0 1 3.5 3.5V19"></path><circle cx="10" cy="7" r="3"></circle><path d="M17 8h4M19 6v4"></path></svg>
-              <span><strong>المعلمون</strong><small>تصفح التطبيقات</small></span>
-            </button>
-            <button class="role-button" type="button" data-role="admin" data-testid="admin-role">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
-              <span><strong>الإدارة</strong><small>إدارة المحتوى</small></span>
-            </button>
-          </div>
-
-          <form id="login-form">
-            <label for="login-password">كلمة المرور</label>
-            <div class="password-field">
-              <input id="login-password" data-testid="login-password" type="password" autocomplete="current-password" placeholder="أدخل كلمة المرور" required>
-              <button class="icon-button password-toggle" type="button" data-toggle-password="login-password" aria-label="إظهار كلمة المرور">
-                <svg class="eye-open" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
-              </button>
-            </div>
-            <button class="primary-button login-button" data-testid="login-submit" id="login-submit" type="submit" disabled>
-              دخول إلى البوابة
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-            </button>
-            <p class="form-status" id="login-status" role="status">جاري الاتصال بقاعدة البيانات...</p>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <div class="app-view" id="app-view" hidden>
-      <header class="topbar">
-        <a class="logo" href="#" aria-label="الصفحة الرئيسية">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 48 48"><path d="M8 12.5 24 6l16 6.5L24 19 8 12.5Z"></path><path d="M13 17v12.5C13 34 18 38 24 38s11-4 11-8.5V17"></path><path d="M40 13v13"></path></svg>
-          </span>
-          <span><strong>بوابة المعلم</strong><small>تطبيقات تعليمية بين يديك</small></span>
-        </a>
-
-        <div class="header-actions">
-          <span class="connection-pill" id="connection-pill">
-            <span class="connection-dot"></span>
-            <span id="connection-label">متصل</span>
-          </span>
-          <button class="header-button" id="settings-button" type="button" hidden>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1v.1h-4v-.1a1.7 1.7 0 0 0-1.1-1.6 1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1-.4h-.1v-4H3A1.7 1.7 0 0 0 4.6 8.5a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1v-.1h4V3A1.7 1.7 0 0 0 15.5 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.4 9c.2.36.4.7.6 1 .24.34.58.4 1 .4h.1v4H21a1.7 1.7 0 0 0-1.6.6Z"></path></svg>
-            الإعدادات
-          </button>
-          <div class="user-chip">
-            <span class="user-avatar" id="user-avatar">م</span>
-            <span><strong id="role-title">حساب المعلم</strong><small id="role-subtitle">عرض التطبيقات</small></span>
-          </div>
-          <button class="icon-button logout-button" id="logout-button" type="button" aria-label="تسجيل الخروج" title="تسجيل الخروج">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5M15 12H3"></path><path d="M14 4h5a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-5"></path></svg>
-          </button>
-        </div>
-      </header>
-
-      <main>
-        <section class="hero">
-          <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
-          <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
-          <div class="hero-content">
-            <p class="eyebrow light" id="hero-eyebrow">مكتبة التطبيقات التعليمية</p>
-            <h1 id="hero-title">أهلًا بك في بوابة المعلم</h1>
-            <p id="hero-description">استكشف الأدوات والتطبيقات التي تساعدك في جعل الدرس أكثر تفاعلًا ومتعة.</p>
-          </div>
-          <div class="hero-stat">
-            <span class="stat-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"></rect><rect x="14" y="3" width="7" height="7" rx="2"></rect><rect x="3" y="14" width="7" height="7" rx="2"></rect><rect x="14" y="14" width="7" height="7" rx="2"></rect></svg>
-            </span>
-            <span><strong id="hero-count">0</strong><small>تطبيق متاح</small></span>
-          </div>
-        </section>
-
-        <section class="content-shell" aria-labelledby="apps-title">
-          <div class="content-heading">
-            <div>
-              <p class="eyebrow">مجموعتك الرقمية</p>
-              <h2 id="apps-title">التطبيقات التعليمية</h2>
-              <p class="section-copy">اختر التطبيق المناسب وابدأ استخدامه مباشرة.</p>
-            </div>
-            <button class="primary-button add-button" id="add-app-button" data-testid="add-app" type="button" hidden>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
-              إضافة تطبيق
-            </button>
-          </div>
-
-          <div class="toolbar">
-            <label class="search-field" for="search-input">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
-              <input id="search-input" type="search" placeholder="ابحث باسم التطبيق أو وصفه...">
-            </label>
-            <span class="result-count"><strong id="result-count">0</strong> تطبيق</span>
-          </div>
-
-          <div class="apps-grid" id="apps-grid" aria-live="polite"></div>
-
-          <div class="empty-state" id="empty-state" hidden>
-            <div class="empty-illustration" aria-hidden="true">
-              <svg viewBox="0 0 96 96"><rect x="18" y="28" width="60" height="48" rx="10"></rect><path d="M34 28v-7a7 7 0 0 1 7-7h14a7 7 0 0 1 7 7v7M36 48h24M36 59h14"></path><circle cx="72" cy="71" r="15"></circle><path d="M72 64v14M65 71h14"></path></svg>
-            </div>
-            <h3 id="empty-title">لا توجد تطبيقات بعد</h3>
-            <p id="empty-description">ستظهر التطبيقات التعليمية هنا فور إضافتها من الإدارة.</p>
-            <button class="primary-button" id="empty-add-button" type="button" hidden>إضافة أول تطبيق</button>
-          </div>
-        </section>
-      </main>
-
-      <footer>
-        <span>بوابة المعلم</span>
-        <span>صُنعت لتجعل الوصول إلى أدواتك أسهل</span>
-      </footer>
+  <section class="login-screen" id="login-screen" aria-labelledby="login-title">
+    <div class="login-brand">
+      <div class="brand-mark brand-mark-large" aria-hidden="true">🎓</div>
+      <p class="eyebrow light">مساحتك الرقمية للتعليم</p>
+      <h1>بوابة المعلم</h1>
+      <p class="brand-copy">كل تطبيقاتك التعليمية في مكان واحد، مرتبة وجاهزة للوصول من أي جهاز.</p>
+      <div class="brand-points" aria-label="مميزات البوابة"><span>✓ وصول سريع</span><span>✓ تحديث فوري</span><span>✓ واجهة عربية</span></div>
     </div>
-
-    <dialog class="modal" id="app-modal">
-      <form class="modal-card" id="app-form">
-        <div class="modal-header">
-          <div>
-            <p class="eyebrow">إدارة التطبيقات</p>
-            <h2 id="app-modal-title">إضافة تطبيق جديد</h2>
-          </div>
-          <button class="icon-button close-button" data-close-modal="app-modal" type="button" aria-label="إغلاق">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
-          </button>
+    <div class="login-side">
+      <div class="login-card">
+        <div class="mobile-brand"><div class="brand-mark">🎓</div><strong>بوابة المعلم</strong></div>
+        <p class="eyebrow">مرحبًا بعودتك</p>
+        <h2 id="login-title">اختر طريقة الدخول</h2>
+        <p class="login-intro">سجّل الدخول للوصول إلى التطبيقات التعليمية.</p>
+        <div class="role-switch" role="group" aria-label="نوع المستخدم">
+          <button class="role-button active" type="button" data-role="teacher" data-testid="teacher-role"><span><strong>المعلمون</strong><small>تصفح التطبيقات</small></span></button>
+          <button class="role-button" type="button" data-role="admin" data-testid="admin-role"><span><strong>الإدارة</strong><small>إدارة المحتوى</small></span></button>
         </div>
-
-        <input id="app-id" type="hidden">
-        <div class="form-group">
-          <label for="app-name">اسم التطبيق <span>*</span></label>
-          <input id="app-name" data-testid="app-name" type="text" maxlength="80" placeholder="مثال: عجلة الأسماء" required>
-        </div>
-        <div class="form-group">
-          <label for="app-url">رابط التطبيق <span>*</span></label>
-          <input id="app-url" data-testid="app-url" type="url" inputmode="url" dir="ltr" placeholder="https://example.com" required>
-        </div>
-        <div class="form-group">
-          <label for="app-description">نبذة عن التطبيق <span>*</span></label>
-          <textarea id="app-description" data-testid="app-description" rows="5" maxlength="500" placeholder="اكتب وصفًا قصيرًا يوضح فائدة التطبيق..." required></textarea>
-          <small class="character-count"><span id="description-count">0</span>/500</small>
-        </div>
-
-        <p class="form-status modal-status" id="app-form-status" role="status"></p>
-        <div class="modal-actions">
-          <button class="secondary-action" data-close-modal="app-modal" type="button">إلغاء</button>
-          <button class="primary-button" data-testid="save-app" id="save-app-button" type="submit">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7 10 17l-5-5"></path></svg>
-            حفظ التطبيق
-          </button>
-        </div>
-      </form>
-    </dialog>
-
-    <dialog class="modal" id="settings-modal">
-      <div class="modal-card settings-card">
-        <div class="modal-header">
-          <div>
-            <p class="eyebrow">الأمان والدخول</p>
-            <h2>إعدادات كلمات المرور</h2>
+        <form id="login-form">
+          <label for="login-password">كلمة المرور</label>
+          <div class="password-field">
+            <input id="login-password" data-testid="login-password" type="password" autocomplete="current-password" placeholder="أدخل كلمة المرور" required>
+            <button class="icon-button password-toggle" type="button" data-toggle-password="login-password" aria-label="إظهار كلمة المرور">👁</button>
           </div>
-          <button class="icon-button close-button" data-close-modal="settings-modal" type="button" aria-label="إغلاق">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
-          </button>
-        </div>
-
-        <form class="settings-section" id="admin-password-form">
-          <div class="settings-title">
-            <span class="settings-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
-            </span>
-            <div><h3>كلمة مرور الإدارة</h3><p>تُستخدم لإضافة التطبيقات وتعديلها.</p></div>
-          </div>
-          <div class="form-group">
-            <label for="current-admin-password">كلمة المرور الحالية</label>
-            <input id="current-admin-password" type="password" autocomplete="current-password" required>
-          </div>
-          <div class="settings-grid">
-            <div class="form-group">
-              <label for="new-admin-password">كلمة المرور الجديدة</label>
-              <input id="new-admin-password" type="password" autocomplete="new-password" minlength="4" required>
-            </div>
-            <div class="form-group">
-              <label for="confirm-admin-password">تأكيد كلمة المرور</label>
-              <input id="confirm-admin-password" type="password" autocomplete="new-password" minlength="4" required>
-            </div>
-          </div>
-          <button class="outline-button" type="submit">تحديث كلمة مرور الإدارة</button>
-          <p class="form-status" id="admin-password-status" role="status"></p>
-        </form>
-
-        <div class="settings-divider"></div>
-
-        <form class="settings-section" id="teacher-password-form">
-          <div class="settings-title">
-            <span class="settings-icon teacher-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="7" r="3"></circle><path d="M4 19v-1.5A3.5 3.5 0 0 1 7.5 14h5a3.5 3.5 0 0 1 3.5 3.5V19M17 8h4M19 6v4"></path></svg>
-            </span>
-            <div><h3>كلمة مرور المعلمين</h3><p>تُستخدم للدخول وعرض التطبيقات فقط.</p></div>
-          </div>
-          <div class="settings-grid">
-            <div class="form-group">
-              <label for="new-teacher-password">كلمة المرور الجديدة</label>
-              <input id="new-teacher-password" type="password" autocomplete="new-password" minlength="3" required>
-            </div>
-            <div class="form-group">
-              <label for="confirm-teacher-password">تأكيد كلمة المرور</label>
-              <input id="confirm-teacher-password" type="password" autocomplete="new-password" minlength="3" required>
-            </div>
-          </div>
-          <button class="outline-button" type="submit">تحديث كلمة مرور المعلمين</button>
-          <p class="form-status" id="teacher-password-status" role="status"></p>
+          <button class="primary-button login-button" data-testid="login-submit" id="login-submit" type="submit" disabled>دخول إلى البوابة</button>
+          <p class="form-status" id="login-status" role="status">جاري الاتصال بقاعدة البيانات...</p>
         </form>
       </div>
-    </dialog>
-
-    <dialog class="confirm-dialog" id="delete-dialog">
-      <div class="confirm-card">
-        <span class="danger-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M9 6V4h6v2M8 10v7M12 10v7M16 10v7M5 6l1 15h12l1-15"></path></svg>
-        </span>
-        <h2>حذف التطبيق؟</h2>
-        <p>سيتم حذف <strong id="delete-app-name"></strong> من البوابة. لا يمكن التراجع عن هذه الخطوة.</p>
-        <div class="modal-actions">
-          <button class="secondary-action" data-close-modal="delete-dialog" type="button">إلغاء</button>
-          <button class="danger-button" id="confirm-delete-button" type="button">نعم، احذف</button>
-        </div>
-      </div>
-    </dialog>
-
-    <div class="toast" id="toast" role="status" aria-live="polite">
-      <span class="toast-icon">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7 10 17l-5-5"></path></svg>
-      </span>
-      <span id="toast-message"></span>
     </div>
+  </section>
 
-    <script type="module" src="app.js"></script>
-  </body>
+  <div class="app-view" id="app-view" hidden>
+    <header class="topbar">
+      <a class="logo" href="#" aria-label="الصفحة الرئيسية"><span class="brand-mark">🎓</span><span><strong>بوابة المعلم</strong><small>تطبيقات تعليمية بين يديك</small></span></a>
+      <div class="header-actions">
+        <span class="connection-pill" id="connection-pill"><span class="connection-dot"></span><span id="connection-label">متصل</span></span>
+        <button class="header-button" id="settings-button" type="button" hidden>الإعدادات</button>
+        <div class="user-chip"><span class="user-avatar" id="user-avatar">م</span><span><strong id="role-title">حساب المعلم</strong><small id="role-subtitle">عرض التطبيقات</small></span></div>
+        <button class="icon-button logout-button" id="logout-button" type="button" aria-label="تسجيل الخروج" title="تسجيل الخروج">↩</button>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="hero-content"><p class="eyebrow light" id="hero-eyebrow">مكتبة التطبيقات التعليمية</p><h1 id="hero-title">أهلًا بك في بوابة المعلم</h1><p id="hero-description">استكشف الأدوات والتطبيقات التي تساعدك في جعل الدرس أكثر تفاعلًا ومتعة.</p></div>
+        <div class="hero-stat"><span><strong id="hero-count">0</strong><small>تطبيق متاح</small></span></div>
+      </section>
+      <section class="content-shell" aria-labelledby="apps-title">
+        <div class="content-heading"><div><p class="eyebrow">مجموعتك الرقمية</p><h2 id="apps-title">التطبيقات التعليمية</h2><p class="section-copy">اختر التطبيق المناسب وابدأ استخدامه مباشرة.</p></div><button class="primary-button add-button" id="add-app-button" data-testid="add-app" type="button" hidden>إضافة تطبيق</button></div>
+        <div class="toolbar"><label class="search-field" for="search-input"><input id="search-input" type="search" placeholder="ابحث باسم التطبيق أو وصفه..."></label><span class="result-count"><strong id="result-count">0</strong> تطبيق</span></div>
+        <div class="apps-grid" id="apps-grid" aria-live="polite"></div>
+        <div class="empty-state" id="empty-state" hidden><h3 id="empty-title">لا توجد تطبيقات بعد</h3><p id="empty-description">ستظهر التطبيقات التعليمية هنا فور إضافتها من الإدارة.</p><button class="primary-button" id="empty-add-button" type="button" hidden>إضافة أول تطبيق</button></div>
+      </section>
+    </main>
+    <footer><span>بوابة المعلم</span><span> صُنعت لتجعل الوصول إلى أدواتك أسهل</span></footer>
+  </div>
+
+  <dialog class="modal" id="app-modal"><form class="modal-card" id="app-form"><div class="modal-header"><div><p class="eyebrow">إدارة التطبيقات</p><h2 id="app-modal-title">إضافة تطبيق جديد</h2></div><button class="icon-button close-button" data-close-modal="app-modal" type="button" aria-label="إغلاق">×</button></div><input id="app-id" type="hidden"><div class="form-group"><label for="app-name">اسم التطبيق <span>*</span></label><input id="app-name" data-testid="app-name" type="text" maxlength="80" placeholder="مثال: عجلة الأسماء" required></div><div class="form-group"><label for="app-url">رابط التطبيق <span>*</span></label><input id="app-url" data-testid="app-url" type="url" inputmode="url" dir="ltr" placeholder="https://example.com" required></div><div class="form-group"><label for="app-description">نبذة عن التطبيق <span>*</span></label><textarea id="app-description" data-testid="app-description" rows="5" maxlength="500" placeholder="اكتب وصفًا قصيرًا يوضح فائدة التطبيق..." required></textarea><small class="character-count"><span id="description-count">0</span>/500</small></div><p class="form-status modal-status" id="app-form-status" role="status"></p><div class="modal-actions"><button class="secondary-action" data-close-modal="app-modal" type="button">إلغاء</button><button class="primary-button" data-testid="save-app" id="save-app-button" type="submit">حفظ التطبيق</button></div></form></dialog>
+
+  <dialog class="modal" id="settings-modal"><div class="modal-card settings-card"><div class="modal-header"><div><p class="eyebrow">الأمان والدخول</p><h2>إعدادات كلمات المرور</h2></div><button class="icon-button close-button" data-close-modal="settings-modal" type="button" aria-label="إغلاق">×</button></div><form class="settings-section" id="admin-password-form"><div class="settings-title"><div><h3>كلمة مرور الإدارة</h3><p>تُستخدم لإضافة التطبيقات وتعديلها.</p></div></div><div class="form-group"><label for="current-admin-password">كلمة المرور الحالية</label><input id="current-admin-password" type="password" autocomplete="current-password" required></div><div class="settings-grid"><div class="form-group"><label for="new-admin-password">كلمة المرور الجديدة</label><input id="new-admin-password" type="password" autocomplete="new-password" minlength="4" required></div><div class="form-group"><label for="confirm-admin-password">تأكيد كلمة المرور</label><input id="confirm-admin-password" type="password" autocomplete="new-password" minlength="4" required></div></div><button class="outline-button" type="submit">تحديث كلمة مرور الإدارة</button><p class="form-status" id="admin-password-status" role="status"></p></form><div class="settings-divider"></div><form class="settings-section" id="teacher-password-form"><div class="settings-title"><div><h3>كلمة مرور المعلمين</h3><p>تُستخدم للدخول وعرض التطبيقات فقط.</p></div></div><div class="settings-grid"><div class="form-group"><label for="new-teacher-password">كلمة المرور الجديدة</label><input id="new-teacher-password" type="password" autocomplete="new-password" minlength="3" required></div><div class="form-group"><label for="confirm-teacher-password">تأكيد كلمة المرور</label><input id="confirm-teacher-password" type="password" autocomplete="new-password" minlength="3" required></div></div><button class="outline-button" type="submit">تحديث كلمة مرور المعلمين</button><p class="form-status" id="teacher-password-status" role="status"></p></form></div></dialog>
+
+  <dialog class="confirm-dialog" id="delete-dialog"><div class="confirm-card"><span class="danger-icon">!</span><h2>حذف التطبيق؟</h2><p>سيتم حذف <strong id="delete-app-name"></strong> من البوابة. لا يمكن التراجع عن هذه الخطوة.</p><div class="modal-actions"><button class="secondary-action" data-close-modal="delete-dialog" type="button">إلغاء</button><button class="danger-button" id="confirm-delete-button" type="button">نعم، احذف</button></div></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"><span class="toast-icon">✓</span><span id="toast-message"></span></div>
+  <script type="module" src="app.js?v=20260626-3"></script>
+</body>
 </html>
