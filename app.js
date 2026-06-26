@@ -6,6 +6,8 @@ const PATH = "teacherPortal";
 const SESSION_KEY = "teacherGateSession";
 const LOCAL_APPS_KEY = "teacherGateLocalApps";
 const LOCAL_SETTINGS_KEY = "teacherGateSettings";
+const ADMIN_HASH = "fe9bbd400bb6cb314531e3462507661401959afc69aae96bc6aec2c213b83bc1";
+const TEACHER_HASH = "a4281a7f5aa683fdb7ccb37c3c28e51db6db06da3a557a7897aaae755fd42478";
 const COLORS = ["#2f69d9", "#0f9f6e", "#f4b740", "#8b5cf6", "#ef476f", "#06a7b6"];
 
 let db = null;
@@ -13,45 +15,36 @@ let storageMode = "local";
 let activeRole = null;
 let selectedRole = "teacher";
 let apps = [];
-let filteredApps = [];
-let settings = null;
+let settings = defaultSettings();
 let pendingDelete = null;
 let toastTimer = null;
 
 const $ = (id) => document.getElementById(id);
 const el = {
-  loginScreen: $("login-screen"), appView: $("app-view"), loginForm: $("login-form"), loginPassword: $("login-password"),
-  loginSubmit: $("login-submit"), loginStatus: $("login-status"), roleButtons: document.querySelectorAll(".role-button"),
-  connectionPill: $("connection-pill"), connectionLabel: $("connection-label"), settingsButton: $("settings-button"), logoutButton: $("logout-button"),
-  roleTitle: $("role-title"), roleSubtitle: $("role-subtitle"), userAvatar: $("user-avatar"), heroTitle: $("hero-title"), heroDescription: $("hero-description"),
-  heroCount: $("hero-count"), resultCount: $("result-count"), appsGrid: $("apps-grid"), emptyState: $("empty-state"), emptyTitle: $("empty-title"),
-  emptyDescription: $("empty-description"), emptyAddButton: $("empty-add-button"), addAppButton: $("add-app-button"), searchInput: $("search-input"),
-  appModal: $("app-modal"), appForm: $("app-form"), appId: $("app-id"), appName: $("app-name"), appUrl: $("app-url"), appDescription: $("app-description"),
-  descriptionCount: $("description-count"), appModalTitle: $("app-modal-title"), saveAppButton: $("save-app-button"), appFormStatus: $("app-form-status"),
-  settingsModal: $("settings-modal"), adminPasswordForm: $("admin-password-form"), teacherPasswordForm: $("teacher-password-form"),
-  currentAdminPassword: $("current-admin-password"), newAdminPassword: $("new-admin-password"), confirmAdminPassword: $("confirm-admin-password"),
-  newTeacherPassword: $("new-teacher-password"), confirmTeacherPassword: $("confirm-teacher-password"), adminPasswordStatus: $("admin-password-status"), teacherPasswordStatus: $("teacher-password-status"),
-  deleteDialog: $("delete-dialog"), deleteAppName: $("delete-app-name"), confirmDeleteButton: $("confirm-delete-button"), toast: $("toast"), toastMessage: $("toast-message")
+  loginScreen: $("login-screen"), appView: $("app-view"), loginForm: $("login-form"), loginPassword: $("login-password"), loginSubmit: $("login-submit"), loginStatus: $("login-status"),
+  roleButtons: document.querySelectorAll(".role-button"), connectionPill: $("connection-pill"), connectionLabel: $("connection-label"), settingsButton: $("settings-button"), logoutButton: $("logout-button"),
+  roleTitle: $("role-title"), roleSubtitle: $("role-subtitle"), userAvatar: $("user-avatar"), heroTitle: $("hero-title"), heroDescription: $("hero-description"), heroCount: $("hero-count"),
+  resultCount: $("result-count"), appsGrid: $("apps-grid"), emptyState: $("empty-state"), emptyTitle: $("empty-title"), emptyDescription: $("empty-description"), emptyAddButton: $("empty-add-button"),
+  addAppButton: $("add-app-button"), searchInput: $("search-input"), appModal: $("app-modal"), appForm: $("app-form"), appId: $("app-id"), appName: $("app-name"), appUrl: $("app-url"),
+  appDescription: $("app-description"), descriptionCount: $("description-count"), appModalTitle: $("app-modal-title"), saveAppButton: $("save-app-button"), appFormStatus: $("app-form-status"),
+  settingsModal: $("settings-modal"), adminPasswordForm: $("admin-password-form"), teacherPasswordForm: $("teacher-password-form"), currentAdminPassword: $("current-admin-password"),
+  newAdminPassword: $("new-admin-password"), confirmAdminPassword: $("confirm-admin-password"), newTeacherPassword: $("new-teacher-password"), confirmTeacherPassword: $("confirm-teacher-password"),
+  adminPasswordStatus: $("admin-password-status"), teacherPasswordStatus: $("teacher-password-status"), deleteDialog: $("delete-dialog"), deleteAppName: $("delete-app-name"),
+  confirmDeleteButton: $("confirm-delete-button"), toast: $("toast"), toastMessage: $("toast-message")
 };
 
 init();
 
-async function init() {
-  settings = defaultSettings();
+function init() {
   bindEvents();
   setStatus("جاري الاتصال بقاعدة البيانات...");
   try {
-    const app = initializeApp(firebaseConfig);
-    db = getDatabase(app);
+    db = getDatabase(initializeApp(firebaseConfig));
     storageMode = "firebase";
     listenToFirebase();
     setConnection(true);
   } catch (error) {
-    console.warn(error);
-    storageMode = "local";
-    loadLocalData();
-    setConnection(false);
-    setStatus("تعذر الاتصال بـ Firebase. سيتم استخدام التخزين المحلي مؤقتًا.", "error");
+    fallback(error);
   }
   const savedRole = sessionStorage.getItem(SESSION_KEY);
   if (savedRole) showApp(savedRole);
@@ -81,27 +74,27 @@ function listenToFirebase() {
     if (snapshot.exists()) settings = { ...defaultSettings(), ...snapshot.val() };
     else await set(ref(db, `${PATH}/settings`), defaultSettings(true));
     setStatus("جاهز للدخول");
-  }, (error) => fallback(error));
+  }, fallback);
 
   onValue(ref(db, `${PATH}/apps`), (snapshot) => {
     const value = snapshot.val() || {};
     apps = Object.entries(value).map(([id, app]) => ({ id, ...app })).sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
     renderApps();
-  }, (error) => fallback(error));
+  }, fallback);
 }
 
 function fallback(error) {
   console.warn(error);
   storageMode = "local";
-  loadLocalData();
-  setConnection(false);
-  setStatus("تعذر الوصول إلى Firebase. تعمل البوابة محليًا الآن.", "error");
-}
-
-function loadLocalData() {
   settings = { ...defaultSettings(), ...JSON.parse(localStorage.getItem(LOCAL_SETTINGS_KEY) || "{}") };
   apps = JSON.parse(localStorage.getItem(LOCAL_APPS_KEY) || "[]");
+  setConnection(false);
+  setStatus("تعذر الوصول إلى Firebase. تعمل البوابة محليًا الآن.", "error");
   renderApps();
+}
+
+function defaultSettings(forFirebase = false) {
+  return { adminPasswordHash: ADMIN_HASH, teacherPasswordHash: TEACHER_HASH, updatedAt: forFirebase ? serverTimestamp() : Date.now() };
 }
 
 function selectRole(role) {
@@ -143,18 +136,17 @@ function logout() {
   sessionStorage.removeItem(SESSION_KEY);
   el.appView.hidden = true;
   el.loginScreen.hidden = false;
-  el.loginPassword.value = "";
   selectRole("teacher");
 }
 
 function renderApps() {
   if (!el.appsGrid) return;
   const query = normalizeText(el.searchInput.value);
-  filteredApps = apps.filter((app) => normalizeText(`${app.name || ""} ${app.description || ""} ${app.url || ""}`).includes(query));
+  const filtered = apps.filter((app) => normalizeText(`${app.name || ""} ${app.description || ""} ${app.url || ""}`).includes(query));
   el.heroCount.textContent = apps.length;
-  el.resultCount.textContent = filteredApps.length;
-  el.appsGrid.innerHTML = filteredApps.map(cardHtml).join("");
-  const empty = filteredApps.length === 0;
+  el.resultCount.textContent = filtered.length;
+  el.appsGrid.innerHTML = filtered.map(cardHtml).join("");
+  const empty = filtered.length === 0;
   el.emptyState.hidden = !empty;
   el.appsGrid.hidden = empty;
   el.emptyTitle.textContent = query ? "لا توجد نتائج مطابقة" : "لا توجد تطبيقات بعد";
@@ -266,19 +258,6 @@ async function updatePasswords(change, statusElement, message) {
     setFormStatus(statusElement, message, "success"); showToast(message);
   } catch (error) { setFormStatus(statusElement, `تعذر التحديث: ${friendlyError(error)}`, "error"); }
 }
-
-async function defaultSettings(forFirebase = false) {
-  const base = { adminPasswordHash: awaitHash("tech"), teacherPasswordHash: awaitHash("STD"), updatedAt: Date.now() };
-  return forFirebase ? { ...base, updatedAt: serverTimestamp() } : base;
-}
-function awaitHash(text){ return null; }
-
-(async () => {
-  const admin = await hashPassword("tech");
-  const teacher = await hashPassword("STD");
-  defaultSettings = function(forFirebase = false) { return { adminPasswordHash: admin, teacherPasswordHash: teacher, updatedAt: forFirebase ? serverTimestamp() : Date.now() }; };
-  if (!settings || !settings.adminPasswordHash) settings = defaultSettings();
-})();
 
 function persistLocal() { localStorage.setItem(LOCAL_APPS_KEY, JSON.stringify(apps)); }
 function setConnection(ok) { el.connectionPill.classList.toggle("offline", !ok); el.connectionLabel.textContent = ok ? "متصل" : "محلي"; }
